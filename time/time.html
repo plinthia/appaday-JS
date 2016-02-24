@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>What time is it?</h1>
+
+<button onclick="time()">Quelle heure a t'il?</button>
+<p id="demo"></p>
+<br>
+<button onclick="drawCircle()">Draw a circle</button>
+<button onclick="timeDots()">Draw some dots</button>
+<br>
+<canvas id="myCanvas" width="500" height="200" style="border:0px">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script type="text/javascript">
+function time(){
+	var x = new Date().getHours();
+	var y = new Date().getMinutes();
+	var now = x +":"+y;
+	document.getElementById("demo").innerHTML=now;
+}
+function drawCircle(){
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(100,100,80,0,2*Math.PI);
+	ctx.stroke();
+	ctx.fillStyle="purple";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(100,100,10,0,2*Math.PI);
+	ctx.stroke();
+	ctx.fillStyle="yellow";
+	ctx.fill();
+}
+function timeDots(){
+	var x = new Date().getHours();
+	var y = new Date().getMinutes();
+	
+	if(x===0){
+		var hour=12;
+	}else if(x>=12){
+		var hour=x-12;
+	}else{
+		var hour=x;
+	}
+	var i=1
+	while(i<=hour){
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(i*21,30,10,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle="yellow";
+		ctx.fill();
+		i++
+	}
+	var fiveMin = Math.floor(y/5);
+	var min = y%5;
+	var mins = fiveMin + " " + min;
+	var j=1
+	while(j<=fiveMin){
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(j*15,60,7,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle="green";
+		ctx.fill();
+		j++
+	}
+	var k=1
+	while(k<=min){
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(k*11,90,5,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle="blue";
+		ctx.fill();
+		k++
+	}
+	
+}
+</script>
+</body>
+</html>
