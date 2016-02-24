@@ -24,32 +24,18 @@ p{
 <input type="number" id="price1" step="0.01" placeholder="0.00">
 <input type="number" id="quantity1" placeholder="quantity">
 </p>
-<button onclick="total()">Charge it!</button>
-<p id="output"> </p>
-
 
 <p> Add your own inventory </p>
 <button onclick="addBox()">Add item</button>
 <button onclick="removeBox()">Remove last item</button>
 <div id="fooBar"></div>
 
-<button onclick="newTotal()">Total</button>
+<button onclick="newTotal()">Charge it!</button>
 <p id="newTotal"></p>
 <p id="grandTotal"></p>
 </body>
 
 <script type="text/javascript">
-function test(){
-	var x = document.getElementById("item[]").value;
-	document.getElementById("test").innerHTML = x;
-}
-function total(){
-	var x = document.getElementById("item1").value;
-	var y = document.getElementById("price1").value;
-	var z = document.getElementById("quantity1").value;
-	var price=y*z;
-	document.getElementById("output").innerHTML = "You bought " + z + " " + x + " for a total of $" + price;
-}
 var i=1
 function addBox(){
 	i++;
