@@ -13,6 +13,15 @@ p{
 	font-family: "helvetica";
 	color:#00b300;
 }
+button{
+	font-family: "helvetica";
+	color:#00b300;
+	border: 2px solid #00b300;
+	border-radius: 4px;
+	text-align: center;
+	padding: 15px 32px;
+	font-size: 16px;
+}
 </style>
 <body>
 <h1> Let's make a deal!</h1>
@@ -59,9 +68,13 @@ function doorPick(x){
 		case 2:
 		if(winnerNumber===2){
 			//fix THIS!!! need to random chose between 1 and 3
-			var open = 1;
+			var number = Math.ceil(Math.random()*2);
+			if(number===1){
+				var open = 1;
+			}else{
+				var open = 3;
+			}
 			document.getElementById("door"+open).setAttribute("src","wrongdoor.jpg");
-			document.getElementById("test").innerHTML=open;
 			break;
 
 		}else if (winnerNumber===1){
@@ -94,10 +107,10 @@ function doorPick(x){
 	document.getElementById("message").innerHTML="You selected door number " + x + " let me open one of the losing doors. Do you want to keep your selection? Or switch to the remaining door?";
 	
 
-	var winner="https://www.youtube.com/embed/FiARsQSlzDc?autoplay=0";
+	var winner="https://www.youtube.com/embed/FiARsQSlzDc?autoplay=1";
 	var winner2="https://www.youtube.com/embed/i7gIpuIVE3k?autoplay=1";
 	//var winner="winner"+Math.ceil(Math.random()*2);
-	var loser="https://www.youtube.com/embed/1PNKz48oc2g?autoplay=0";
+	var loser="https://www.youtube.com/embed/1PNKz48oc2g?autoplay=1";
 	var finalButton = document.createElement("button");
 	finalButton.innerHTML="Play Again?"
 	finalButton.onclick=function(){
@@ -156,7 +169,6 @@ function doorPick(x){
 		document.getElementById("lastButton").appendChild(finalButton);
 		
 		}
-	
 	document.getElementById("buttons").appendChild(button1);
 	document.getElementById("buttons").appendChild(button2);
 
