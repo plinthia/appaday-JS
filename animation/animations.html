@@ -29,9 +29,10 @@ button{
 <button onclick="animatedStar()">Rotating star </button>
 <button onclick="circle()">Pulsing circle</button>
 <button onclick="person()">Person waving</button>
+<button onclick="tetris()">Tetris</button>
 <button onclick="clearAnim()">Clear Animation</button>
 <br>
-<canvas id="myCanvas" width="500" height="250" style="border:1px solid black">Your browser does not support HTML5 canvas</canvas>
+<canvas id="myCanvas" width="500" height="250" style="border:0px">Your browser does not support HTML5 canvas</canvas>
 
 <script type="text/javascript">
 var c=document.getElementById("myCanvas");
@@ -109,6 +110,23 @@ function person(){
 	ctx.stroke();
 	k++;
 	window.requestAnimationFrame(person);
+}
+
+var drop=0
+function tetris(){
+	while(drop<=25){
+		ctx.clearRect(0,0,500,250);
+		ctx.save();
+		ctx.translate(0,10*drop);
+		ctx.beginPath();
+		ctx.fillRect(250,0,10,10);
+		ctx.fillRect(250,10,10,10);
+		ctx.fillRect(260,10,10,10);
+		ctx.fillRect(240,10,10,10);
+		ctx.restore();
+		drop++;
+		window.requestAnimationFrame(tetris);
+	}
 }
 
 function clearAnim(){

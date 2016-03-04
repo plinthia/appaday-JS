@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container{
+	width:500px;
+	height:250px;
+	position: relative;
+	background:yellow;
+}
+#animate{
+	width:50px;
+	height: 50px;
+	position:absolute;
+	background-color:red;
+}
+</style>
+<body>
+<h1>Video Games!</h1>
+<p> Navigate the mouse to the cheese</p>
+<p id="test"></p>
+<p id="test2"></p>
+<div id="container">
+	<div id="animate"></div>
+</div>
+<!--<canvas id="myCanvas" width="500" height="250" style="border:1px solid black">Your browser does not support canvas</canvas>-->
+
+<script type="text/javascript">
+//document.onkeydown=checkKey;
+//document.canvasWidth=width;
+//document.canvasHeight=height;
+
+function checkKey(e){
+	var e=e||window.event;
+	if(e.keyCode == '38'){
+		var x = "up";
+		//up arrow
+	}else if (e.keyCode=="40"){
+		var x = "down";
+		//down arrow
+	}else if (e.keyCode=="37"){
+		var x = "left";
+		//left arrow
+	}else if (e.keyCode=='39'){
+		var x = "right";
+		//right arrow
+	}		
+	moveCharacter(x);	
+	document.getElementById("test").innerHTML=x;
+}
+
+/*c=document.getElementById("myCanvas");
+ctx=c.getContext("2d");
+
+function drawBoard(){
+	ctx.fillRect(0,0,10,10);
+	ctx.fillStyle="black";
+}*/
+var i=0;
+var j=0;
+function moveCharacter(x){
+	var elem=document.getElementById("animate");
+	var id=window.setInterval(frame,5,x);
+	function frame(y){
+	switch(y){
+		case "up":
+		if(i==0){
+			clearInterval(id);
+		}else{
+			elem.style.top=i+"px";
+			i--;
+			}
+		break;
+		case "down":
+		if(i==200){
+			clearInterval(id);
+		}else{
+			elem.style.top=i+"px";
+			i++;	//document.getElementById("test2").innerHTML=i;
+
+		}
+		break;
+		case "left":
+		if(j==0){
+			clearInterval(id);
+		}else{
+			j--;
+			elem.style.left=j+"px";
+		}
+		break;
+		case "right":
+		if(j==450){
+			clearInterval(id);
+		}else{
+			j++;
+			elem.style.left=j+"px";
+		}
+		break;
+		}
+	}
+}
+
+//window.onload=drawBoard;
+window.onkeydown=checkKey;
+</script>
+</body>
+</html>
