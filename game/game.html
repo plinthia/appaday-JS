@@ -13,6 +13,14 @@
 	position:absolute;
 	background-color:red;
 }
+#board{
+	width:50px;
+	height:50px;
+	position:absolute;
+	background-color: black;
+	top:0px;
+	left:450px;
+}
 </style>
 <body>
 <h1>Video Games!</h1>
@@ -21,6 +29,7 @@
 <p id="test2"></p>
 <div id="container">
 	<div id="animate"></div>
+	<div id="board"></div>
 </div>
 <!--<canvas id="myCanvas" width="500" height="250" style="border:1px solid black">Your browser does not support canvas</canvas>-->
 
@@ -61,9 +70,10 @@ function moveCharacter(x){
 	var elem=document.getElementById("animate");
 	var id=window.setInterval(frame,5,x);
 	function frame(y){
+		isCollide();
 	switch(y){
 		case "up":
-		if(i==0){
+		if(i==-1){
 			clearInterval(id);
 		}else{
 			elem.style.top=i+"px";
@@ -71,7 +81,7 @@ function moveCharacter(x){
 			}
 		break;
 		case "down":
-		if(i==200){
+		if(i==201){
 			clearInterval(id);
 		}else{
 			elem.style.top=i+"px";
@@ -99,6 +109,16 @@ function moveCharacter(x){
 	}
 }
 
+function isCollide(){
+	var character = document.getElementById("animate");
+	var board=document.getElementById("board");
+	if(character.x<board.x+board.width && character.x + character.width>board.x&&character.y<board.y+board.height&&character.height+character.y>board.y){
+		clearInterval(id)
+	}else{
+
+	}
+	document.getElementById("test2").innerHTML=board.style.left;
+}
 //window.onload=drawBoard;
 window.onkeydown=checkKey;
 </script>
