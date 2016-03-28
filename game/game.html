@@ -85,8 +85,7 @@ function moveCharacter(x){
 			clearInterval(id);
 		}else{
 			elem.style.top=i+"px";
-			i++;	//document.getElementById("test2").innerHTML=i;
-
+			i++;	
 		}
 		break;
 		case "left":
@@ -106,18 +105,32 @@ function moveCharacter(x){
 		}
 		break;
 		}
+		//case "collision":
+		//clearInterval(id);
+		//break;
 	}
 }
 
 function isCollide(){
 	var character = document.getElementById("animate");
 	var board=document.getElementById("board");
-	if(character.x<board.x+board.width && character.x + character.width>board.x&&character.y<board.y+board.height&&character.height+character.y>board.y){
-		clearInterval(id)
+	var charX=parseInt(character.style.left, 10);
+	var charY=parseInt(character.style.top, 10);
+	var boardX=parseInt(board.style.left,10);
+	var boardY=parseInt(board.style.top,10);
+	var charH=parseInt(character.clientHeight,10);
+	var charW=parseInt(character.clientWidth,10);
+	var boardH=parseInt(board.clientHeight, 10);
+	var boardW=parseInt(board.clientWidth, 10);
+	if(charX<500 && charX + 50 > 450 && charY < 50 && 50+charY > 0){
+	//if(charX<boardX + boardW && charX + charW>boardX && charY<boardY + boardH && charH + charY>boardY){
+	var x="collision";
+	return;
+	document.getElementById("test2").innerHTML=charH;
 	}else{
+	//document.getElementById("test2").innerHTML=charX;
 
 	}
-	document.getElementById("test2").innerHTML=board.style.left;
 }
 //window.onload=drawBoard;
 window.onkeydown=checkKey;

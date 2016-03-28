@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+<title> Mouse Game</title>
+<style>
+canvas {background: #eee; display: block; margin:0 auto;}
+</style>
+</head>
+<body>
+<canvas id="myCanvas" width="480" height="320"></canvas>
+
+<script>
+var canvas=document.getElementById("myCanvas");
+ctx=canvas.getContext("2d");
+var characterX=0;
+var characterY=0;
+var characterHeight=50;
+var characterWidth=50;
+var cheeseX=430;
+var cheeseY=100;
+var cheeseHeight=50;
+var cheeseWidth=50;
+var board=[];
+
+document.addEventListener("keydown",keyDownHandler,false);
+//document.addEventListener("keyup",keyUpHandler,false);
+
+function keyDownHandler(e){
+	if(e.keyCode==39){
+		rightPressed=true;
+	}else if(e.keyCode==37){
+		leftPressed=true;
+	}else if(e.keyCode==38){
+		upPressed=true;
+	}else if(e.keyCode==40){
+		downPressed=true;
+	}
+}
+
+
+function drawCharacter(){
+	ctx.beginPath();
+	ctx.rect(characterX,characterY,characterWidth,characterHeight);
+	ctx.fillStyle="red";
+	ctx.fill();
+	ctx.closePath();
+}
+
+function drawBoard(){
+
+}
+
+function drawCheese(){
+	ctx.beginPath();
+	ctx.rect(cheeseX,cheeseY,cheeseWidth,cheeseHeight);
+	ctx.fillStyle="yellow";
+	ctx.fill();
+	ctx.closePath();
+}
+
+function cheeseDetector(){
+	if(characterX==cheeseX && characterY==cheeseY){
+		alert("You Won");
+		document.location.reload();
+	}
+}
+
+function draw(){
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	drawCharacter();
+	drawCheese();
+	cheeseDetector();
+	if(rightPressed){
+		document.removeEventListener("keydown",keyDownHandler);
+		if(characterX>=canvas.width-characterWidth){
+				rightPressed=false;
+				document.addEventListener("keydown",keyDownHandler);
+			}
+		else if(characterX<canvas.width-characterWidth){
+			characterX+=5;
+			}
+	}
+	else if(leftPressed){
+		document.removeEventListener("keydown",keyDownHandler);
+		if(characterX<=0){
+			leftPressed=false;
+			document.addEventListener("keydown",keyDownHandler);
+		}
+		else if(characterX>0){ 
+		characterX-=5;
+	}
+	}
+	if(downPressed){
+		document.removeEventListener("keydown",keyDownHandler);
+		if(characterY>=canvas.height-characterHeight){
+				downPressed=false;
+				document.addEventListener("keydown",keyDownHandler);
+			}
+		else if(characterY<canvas.height-characterHeight){
+			characterY+=5;
+			}
+	}else if(upPressed){
+		document.removeEventListener("keydown",keyDownHandler);
+		if(characterY<=0){
+			upPressed=false;
+			document.addEventListener("keydown",keyDownHandler);
+		}
+		else if(characterY>0){ 
+		characterY-=5;
+	}
+	}
+}
+
+setInterval(draw,10);
+</script>
+</body>
