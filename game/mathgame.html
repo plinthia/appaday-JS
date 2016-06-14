@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+	<title>Math Game</title>
+	<style>
+	canvas {background: #eee; display: block; margin:0 auto;}
+
+	</style>
+</head>
+<body>
+	
+	<canvas id="myCanvas" height="500" width="300"></canvas>
+
+<p>
+	<input type="number" id="answer">
+</p>
+
+
+<script>
+var canvas=document.getElementById("myCanvas");
+ctx=canvas.getContext("2d");
+
+var numberX = Math.floor((Math.random()*5)*50);
+var numberY= 40;
+var numberDY=1;
+var x=Math.floor(Math.random()*10);
+var y=Math.floor(Math.random()*10);
+var enterPressed=false;
+var equations=[];
+var lives=3;
+var z=x+y;
+var score=0;
+ctx.status=1;
+
+
+
+document.addEventListener("keydown", keydownHandler, false);
+
+function keydownHandler(e){
+	if(e.keyCode==13){
+		enterPressed=true;
+	}
+}
+
+
+var question=[]; 
+for(c=0; c<10; c++){
+	question[c]=[];
+	for(r=0;r<10;r++){
+		question[c][r] = {varX:x, varY:y, status:1};
+	}
+}
+
+function equation(){
+	if(ctx.status==1){
+		ctx.font="16px Arial";
+		ctx.fillStyle = "#0095DD";
+		ctx.id=z;
+		ctx.fillText( x + " + " + y + " = ", numberX , numberY);
+	}
+}
+
+function input(){
+	if(enterPressed){
+		var answers = document.getElementById("answer").value;
+		document.getElementById("answer").value="";
+		if(answers==z){
+			if(ctx.status==1){ // only visible equations count
+				numberDY=0; // stops it from dropping
+				score++;
+				ctx.status=0; // makes the equation disappear
+
+					}
+				}
+		enterPressed=false;
+	}
+}
+
+function numberDrop(){
+	equation();
+	input();
+	if(ctx.status==1){
+		if(numberY==canvas.height){
+			lives--;
+			ctx.status=0;
+			//equation();
+		}else{
+			numberY+=numberDY;
+		}
+	}
+
+}
+
+function drawScore(){
+	ctx.font="16px Arial";
+	ctx.fillStyle = "#0095DD";
+	ctx.fillText("Score: "+ score, 8, 20);
+}
+
+function drawLives(){
+	ctx.font="16px Arial";
+	ctx.fillStyle = "#0096DD";
+	ctx.fillText("Lives: " + lives, 230,20);
+}
+
+function draw(){
+	ctx.clearRect(0,0,canvas.width, canvas.height)	
+	numberDrop();
+	drawScore();
+	drawLives();
+}
+
+setInterval(draw,20);
+</script>
+</body>
+</html>
